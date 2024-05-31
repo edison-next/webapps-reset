@@ -4,8 +4,7 @@
     "description": "GitHub Action to reset Azure WebApp using publish profile credentials",
     "main": "lib/index.js",
     "scripts": {
-        "build": "tsc",
-        "test": "jest"
+        "build": "tsc"
     },
     "repository": {
         "type": "git",
