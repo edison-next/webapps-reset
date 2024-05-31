@@ -1,0 +1,41 @@
+name: Azure WebApp Reset
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build
+
+    - name: Run tests
+      run: npm test
+
+    - name: Run the action
+      id: azure-webapp-reset
+      uses: ./ # Usa la acción de tu repositorio actual
+      with:
+        app-name: ${{ secrets.APP_NAME }}
+        publish-profile: ${{ secrets.PUBLISH_PROFILE }}
+
+    - name: Show output
+      run: echo "WebApp URL: ${{ steps.azure-webapp-reset.outputs.webapp-url }}"

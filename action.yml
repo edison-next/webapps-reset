@@ -1,0 +1,15 @@
+name: 'Azure WebApp Reset'
+description: 'Reset Azure WebApp using publish profile credentials'
+inputs:
+  app-name:
+    description: 'Name of the Azure Web App'
+    required: true
+  publish-profile:
+    description: 'Publish profile file contents with Web Deploy secrets'
+    required: true
+outputs:
+  webapp-url:
+    description: 'URL of the web app'
+runs:
+  using: 'node16'
+  main: 'lib/index.js'
